@@ -62,22 +62,46 @@ namespace XMLanalyze.Views
                 return;
             }
 
-            // Створення фільтрів на основі полів введення і чекбоксів
-            var filters = new Filters
+            // Формування фільтрів
+            var filters = new Filters();
+
+            // Пошук по атрибутам
+            if (NameCheckBox.IsChecked == true)
             {
-                Name = NameCheckBox.IsChecked == true ? NameEntry.Text : "",
-                Faculty = FacultyCheckBox.IsChecked == true ? FacultyEntry.Text : "",
-                Course = CourseCheckBox.IsChecked == true ? CourseEntry.Text : "",
-                Room = RoomCheckBox.IsChecked == true ? RoomEntry.Text : "",
-                CheckInDate = CheckInCheckBox.IsChecked == true ? DateOnly.FromDateTime(CheckInEntry.Date) : (DateOnly?)null,
-                CheckOutDate = CheckOutCheckBox.IsChecked == true ? DateOnly.FromDateTime(CheckOutEntry.Date) : (DateOnly?)null
+                filters.AttributeName = "FullName";
+                filters.AttributeValue = NameEntry.Text;
+            }
 
-            };
+            // Пошук по вузлам
+            if (FacultyCheckBox.IsChecked == true)
+            {
+                filters.NodeName = "Faculty";
+                filters.NodeValue = FacultyEntry.Text;
+            }
+            if (CourseCheckBox.IsChecked == true)
+            {
+                filters.NodeName = "Course";
+                filters.NodeValue = CourseEntry.Text;
+            }
+            if (RoomCheckBox.IsChecked == true)
+            {
+                filters.NodeName = "Room";
+                filters.NodeValue = RoomEntry.Text;
+            }
 
-            // Виконання пошуку з використанням парсера
+            if (CheckInCheckBox.IsChecked == true)
+            {
+                filters.NodeName = "CheckInDate";
+                filters.NodeValue = CheckInEntry.Date.ToString("yyyy-MM-dd");
+            }
+            if (CheckOutCheckBox.IsChecked == true)
+            {
+                filters.NodeName = "CheckOutDate";
+                filters.NodeValue = CheckOutEntry.Date.ToString("yyyy-MM-dd");
+            }
+
+            // Виконання пошуку
             IList<Person> results = _currentParser.Find(filters);
-
-            // Перехід на сторінку з результатами, якщо знайдено хоча б один результат
 
             if (results.Count > 0)
             {
@@ -88,6 +112,7 @@ namespace XMLanalyze.Views
                 await DisplayAlert("Результати пошуку", "Результатів не знайдено.", "OK");
             }
         }
+
 
         private void OnClearClicked(object sender, EventArgs e)
         {

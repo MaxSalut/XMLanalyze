@@ -4,43 +4,43 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="XMLanalyze.Views.FindResultPage"
              Title="Результати пошуку">
-
-    <VerticalStackLayout Padding="10">
+    <ScrollView>
+        <VerticalStackLayout Padding="10">
         <Label Text="Результати пошуку" FontSize="Large" HorizontalOptions="Center" />
         <!-- Таблиця для результатів пошуку -->
+        
         <CollectionView x:Name="ResultsCollectionView">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Grid Padding="10"  >
+                    <Grid Padding="10">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
 
-                        <Label Text="Ім'я" Grid.Column="0" Grid.Row="0" HorizontalTextAlignment="Center" Margin="5"/>
-                        <Label Text="Прізвище" Grid.Column="1" Grid.Row="0" HorizontalTextAlignment="Center" Margin="5" />
-                        <Label Text="Факультет" Grid.Column="2" Grid.Row="0" HorizontalTextAlignment="Center" Margin="5"/>
-                        <Label Text="Курс" Grid.Column="3" Grid.Row="0" HorizontalTextAlignment="Center" Margin="5"/>
-                        <Label Text="Кімната" Grid.Column="4" Grid.Row="0" HorizontalTextAlignment="Center" Margin="5"/>
-                        <Label Text="Дата заселення" Grid.Column="5" Grid.Row="0" HorizontalTextAlignment="Center" Margin="5"/>
-                        <Label Text="Дата виселення" Grid.Column="6" Grid.Row="0" HorizontalTextAlignment="Center" Margin="5"/>
+                        <!-- Заголовки -->
+                        <Label Text="Ім'я" Grid.Column="0" Grid.Row="0"  FontAttributes="Bold" />
+                        <Label Text="Факультет" Grid.Column="1" Grid.Row="0"  FontAttributes="Bold" />
+                        <Label Text="Курс" Grid.Column="2" Grid.Row="0"  FontAttributes="Bold" />
+                        <Label Text="Кімната" Grid.Column="3" Grid.Row="0"  FontAttributes="Bold" />
+                        <Label Text="Дата заселення" Grid.Column="4" Grid.Row="0"  FontAttributes="Bold" />
+                        <Label Text="Дата виселення" Grid.Column="5" Grid.Row="0" FontAttributes="Bold" />
 
-                        <Label Text="{Binding Name.FirstName}" Grid.Column="0" Grid.Row="1" HorizontalTextAlignment="Center" Margin="5"/>
-                        <Label Text="{Binding Name.LastName}" Grid.Column="1" Grid.Row="1" HorizontalTextAlignment="Center" Margin="5"/>
-                        <Label Text="{Binding Faculty}" Grid.Column="2" Grid.Row="1" HorizontalTextAlignment="Center" Margin="5"/>
-                        <Label Text="{Binding Course}" Grid.Column="3" Grid.Row="1" HorizontalTextAlignment="Center" Margin="5"/>
-                        <Label Text="{Binding Room}" Grid.Column="4" Grid.Row="1" HorizontalTextAlignment="Center" Margin="5"/>
-                        <Label Text="{Binding CheckInDate}" Grid.Column="5" Grid.Row="1" HorizontalTextAlignment="Center" Margin="5"/>
-                        <Label Text="{Binding CheckOutDate}" Grid.Column="6" Grid.Row="1" HorizontalTextAlignment="Center" Margin="5"/>
+                        <!-- Значення -->
+                        <Label Text="{Binding FullName}" Grid.Column="0"  Grid.Row="1" />
+                        <Label Text="{Binding Faculty}" Grid.Column="1" Grid.Row="1" />
+                        <Label Text="{Binding Course}" Grid.Column="2" Grid.Row="1" />
+                        <Label Text="{Binding Room}" Grid.Column="3" Grid.Row="1" />
+                        <Label Text="{Binding CheckInDate}" Grid.Column="4" Grid.Row="1" />
+                        <Label Text="{Binding CheckOutDate}" Grid.Column="5" Grid.Row="1" />
                     </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
@@ -48,4 +48,5 @@
 
         <Button Text="Назад" Clicked="OnBackButtonClicked" HorizontalOptions="Center" />
     </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

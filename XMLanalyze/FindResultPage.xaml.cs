@@ -8,12 +8,16 @@ namespace XMLanalyze.Views
 {
     public partial class FindResultPage : ContentPage
     {
-        public FindResultPage(IList<Person> searchResults)
+        public FindResultPage(IEnumerable<Person> people)
         {
             InitializeComponent();
 
-            // Прив'язка результатів пошуку до CollectionView
-            ResultsCollectionView.ItemsSource = searchResults;
+            foreach (var person in people)
+            {
+                Console.WriteLine($"Displaying Person: {person.FullName}, Faculty: {person.Faculty}, Course: {person.Course}, Room: {person.Room}");
+            }
+
+            ResultsCollectionView.ItemsSource = people;
         }
 
         private async void OnBackButtonClicked(object sender, EventArgs e)

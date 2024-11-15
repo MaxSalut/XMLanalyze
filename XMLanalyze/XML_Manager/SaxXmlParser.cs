@@ -1,6 +1,4 @@
-﻿// LabWork2/XML_Manager/SaxXmlParser.cs
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml;
@@ -18,6 +16,34 @@ namespace XMLanalyze.XML_Manager
             _people = new List<Person>();
         }
 
+
+        public IList<Person> Find(Filters filters)
+        {
+            return _people.FindAll(person => filters.ValidatePerson(person));
+        }
+
+        private void SetPersonData(string elementName, string value)
+        {
+            switch (elementName)
+            {
+                case "Faculty":
+                    _currentPerson.Attributes["Faculty"] = value;
+                    break;
+                case "Course":
+                    _currentPerson.Attributes["Course"] = value;
+                    break;
+                case "Room":
+                    _currentPerson.Room = value;
+                    break;
+                case "CheckInDate":
+                    _currentPerson.CheckInDate = DateOnly.TryParse(value, out var checkIn) ? checkIn : (DateOnly?)null;
+                    break;
+                case "CheckOutDate":
+                    _currentPerson.CheckOutDate = DateOnly.TryParse(value, out var checkOut) ? checkOut : (DateOnly?)null;
+                    break;
+            }
+        }
+
         public bool Load(Stream inputStream, XmlReaderSettings settings)
         {
             _people.Clear();
@@ -33,6 +59,18 @@ namespace XMLanalyze.XML_Manager
                             if (reader.Name == "Person")
                             {
                                 _currentPerson = new Person();
+                                if (reader.HasAttributes)
+                                {
+                                    while (reader.MoveToNextAttribute())
+                                    {
+                                        _currentPerson.Attributes[reader.Name] = reader.Value;
+                                        if (reader.Name == "FullName")
+                                        {
+                                            _currentPerson.FullName = reader.Value;
+                                        }
+                                    }
+                                    reader.MoveToElement();
+                                }
                             }
                             else if (_currentPerson != null)
                             {
@@ -59,43 +97,12 @@ namespace XMLanalyze.XML_Manager
                 }
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Console.WriteLine($"Error loading XML: {ex.Message}");
                 return false;
             }
         }
 
-        public IList<Person> Find(Filters filters)
-        {
-            return _people.FindAll(person => filters.ValidatePerson(person));
-        }
-
-        private void SetPersonData(string elementName, string value)
-        {
-            switch (elementName)
-            {
-                case "FirstName":
-                    _currentPerson.Name.FirstName = value;
-                    break;
-                case "LastName":
-                    _currentPerson.Name.LastName = value;
-                    break;
-                case "Faculty":
-                    _currentPerson.Faculty = value;
-                    break;
-                case "Course":
-                    _currentPerson.Course = value;
-                    break;
-                case "Room":
-                    _currentPerson.Room = value;
-                    break;
-                case "CheckInDate":
-                    _currentPerson.CheckInDate = DateOnly.TryParse(value, out DateOnly checkIn) ? checkIn : (DateOnly?)null;
-                    break;
-                case "CheckOutDate":
-                    _currentPerson.CheckOutDate = DateOnly.TryParse(value, out DateOnly checkOut) ? checkOut : (DateOnly?)null;
-                    break;
-            }
-        }
     }
 }

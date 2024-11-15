@@ -1,41 +1,27 @@
-﻿// LabWork2/XML_Manager/Person.cs
-
-// LabWork2/XML_Manager/Person.cs
+﻿using System;
+using System.Collections.Generic;
 
 namespace XMLanalyze.XML_Manager
 {
     public class Person
     {
-        public FullName Name { get; set; }
-        public string Faculty { get; set; }
-        public string Course { get; set; }
+        public string FullName { get; set; }
         public string Room { get; set; }
-        public DateOnly? CheckInDate { get; set; } // Дата заселення
-        public DateOnly? CheckOutDate { get; set; } // Дата виселення
+        public DateOnly? CheckInDate { get; set; }
+        public DateOnly? CheckOutDate { get; set; }
+        public Dictionary<string, string> Attributes { get; set; }
+
+        public string Faculty => Attributes.ContainsKey("Faculty") ? Attributes["Faculty"] : "N/A";
+        public string Course => Attributes.ContainsKey("Course") ? Attributes["Course"] : "N/A";
 
         public Person()
         {
-            Name = new FullName();
-            Faculty = string.Empty;
-            Course = string.Empty;
+            FullName = string.Empty;
             Room = string.Empty;
             CheckInDate = null;
             CheckOutDate = null;
-        }
-
-        public class FullName
-        {
-            public string FirstName { get; set; }
-            public string LastName { get; set; }
-
-
-            public FullName()
-            {
-                FirstName = string.Empty;
-                LastName = string.Empty;
-
-            }
+            Attributes = new Dictionary<string, string>();
         }
     }
-}
 
+}

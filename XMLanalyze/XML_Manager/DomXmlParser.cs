@@ -1,6 +1,4 @@
-﻿// LabWork2/XML_Manager/DomXmlParser.cs
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml;
@@ -33,28 +31,34 @@ namespace XMLanalyze.XML_Manager
                 {
                     var person = new Person
                     {
-                        Name = new Person.FullName
-                        {
-                            FirstName = personNode.SelectSingleNode("Name/FirstName")?.InnerText ?? "",
-                            LastName = personNode.SelectSingleNode("Name/LastName")?.InnerText ?? ""
-                        },
-                        Faculty = personNode.SelectSingleNode("Faculty")?.InnerText ?? "",
-                        Course = personNode.SelectSingleNode("Course")?.InnerText ?? "",
+                        FullName = personNode.Attributes["FullName"]?.Value ?? "",
                         Room = personNode.SelectSingleNode("Room")?.InnerText ?? ""
                     };
 
-                    // Парсинг дат
-                    DateOnly.TryParse(personNode.SelectSingleNode("CheckInDate")?.InnerText, out DateOnly checkInDate);
-                    DateOnly.TryParse(personNode.SelectSingleNode("CheckOutDate")?.InnerText, out DateOnly checkOutDate);
-                    person.CheckInDate = checkInDate != default ? checkInDate : (DateOnly?)null;
-                    person.CheckOutDate = checkOutDate != default ? checkOutDate : (DateOnly?)null;
+                    // Обробка вузлів Faculty і Course
+                    if (personNode.SelectSingleNode("Faculty") != null)
+                        person.Attributes["Faculty"] = personNode.SelectSingleNode("Faculty").InnerText;
+
+                    if (personNode.SelectSingleNode("Course") != null)
+                        person.Attributes["Course"] = personNode.SelectSingleNode("Course").InnerText;
+
+                    // Обробка дат
+                    var datesNode = personNode.SelectSingleNode("Dates");
+                    if (datesNode != null)
+                    {
+                        DateOnly.TryParse(datesNode.SelectSingleNode("CheckInDate")?.InnerText, out var checkInDate);
+                        DateOnly.TryParse(datesNode.SelectSingleNode("CheckOutDate")?.InnerText, out var checkOutDate);
+                        person.CheckInDate = checkInDate != default ? checkInDate : (DateOnly?)null;
+                        person.CheckOutDate = checkOutDate != default ? checkOutDate : (DateOnly?)null;
+                    }
 
                     _people.Add(person);
                 }
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Console.WriteLine($"Error loading XML: {ex.Message}");
                 return false;
             }
         }
@@ -63,5 +67,6 @@ namespace XMLanalyze.XML_Manager
         {
             return _people.FindAll(person => filters.ValidatePerson(person));
         }
+
     }
 }

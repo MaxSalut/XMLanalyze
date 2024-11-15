@@ -4,38 +4,30 @@ namespace XMLanalyze.XML_Manager
 {
     public class Filters
     {
-        public string Name { get; set; }
-        public string Faculty { get; set; }
-        public string Course { get; set; }
-        public string Room { get; set; }
-        public DateOnly? CheckInDate { get; set; } // Дата заселення
-        public DateOnly? CheckOutDate { get; set; } // Дата виселення
+        public string AttributeName { get; set; }
+        public string AttributeValue { get; set; }
+        public string NodeName { get; set; }
+        public string NodeValue { get; set; }
 
         public Filters()
         {
-            Name = string.Empty;
-            Faculty = string.Empty;
-            Course = string.Empty;
-            Room = string.Empty;
-            CheckInDate = null;
-            CheckOutDate = null;
+            AttributeName = string.Empty;
+            AttributeValue = string.Empty;
+            NodeName = string.Empty;
+            NodeValue = string.Empty;
         }
 
         public bool ValidatePerson(Person person)
         {
-            bool nameMatches = string.IsNullOrEmpty(Name) ||
-                               ($"{person.Name.FirstName} {person.Name.LastName}".ToLower().Contains(Name.ToLower()));
-            bool facultyMatches = string.IsNullOrEmpty(Faculty) ||
-                                  person.Faculty.ToLower().Contains(Faculty.ToLower());
-            bool courseMatches = string.IsNullOrEmpty(Course) ||
-                                 person.Course.ToLower().Contains(Course.ToLower());
-            bool roomMatches = string.IsNullOrEmpty(Room) ||
-                               person.Room.ToLower().Contains(Room.ToLower());
+            bool attributeMatches = string.IsNullOrEmpty(AttributeName) ||
+                                    (person.Attributes.ContainsKey(AttributeName) &&
+                                     person.Attributes[AttributeName].Contains(AttributeValue, StringComparison.OrdinalIgnoreCase));
 
-            bool checkInMatches = !CheckInDate.HasValue || person.CheckInDate == CheckInDate;
-            bool checkOutMatches = !CheckOutDate.HasValue || person.CheckOutDate == CheckOutDate;
+            bool nodeMatches = string.IsNullOrEmpty(NodeName) ||
+                               (person.GetType().GetProperty(NodeName)?.GetValue(person)?.ToString()
+                                   ?.Contains(NodeValue, StringComparison.OrdinalIgnoreCase) == true);
 
-            return nameMatches && facultyMatches && courseMatches && roomMatches && checkInMatches && checkOutMatches;
+            return attributeMatches && nodeMatches;
         }
     }
 }
