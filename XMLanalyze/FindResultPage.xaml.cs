@@ -2,22 +2,29 @@
 
 using Microsoft.Maui.Controls;
 using System.Collections.Generic;
+using System.Reflection;
+using System.Xml;
+using System.Xml.Linq;
+using System.Xml.Xsl;
 using XMLanalyze.XML_Manager;
+using XMLanalyze.FindResultPageLogic;
 
 namespace XMLanalyze.Views
 {
     public partial class FindResultPage : ContentPage
     {
-        public FindResultPage(IEnumerable<Person> people)
+        private readonly IList<Person> _searchResults;
+
+        public FindResultPage(IList<Person> searchResults)
         {
             InitializeComponent();
+            _searchResults = searchResults;
+            ResultsCollectionView.ItemsSource = _searchResults;
+        }
 
-            foreach (var person in people)
-            {
-                Console.WriteLine($"Displaying Person: {person.FullName}, Faculty: {person.Faculty}, Course: {person.Course}, Room: {person.Room}");
-            }
-
-            ResultsCollectionView.ItemsSource = people;
+        private async void OnTransformToHtmlClicked(object sender, EventArgs e)
+        {
+            await TransformToHtmlLogic.ExecuteAsync(_searchResults);
         }
 
         private async void OnBackButtonClicked(object sender, EventArgs e)

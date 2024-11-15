@@ -1,52 +1,80 @@
-<!-- LabWork2/Views/FindResultPage.xaml -->
-
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="XMLanalyze.Views.FindResultPage"
              Title="Результати пошуку">
+    <ContentPage.BackgroundColor>
+        <Color>#F3F4F6</Color>
+        <!-- Світлий фон -->
+    </ContentPage.BackgroundColor>
     <ScrollView>
-        <VerticalStackLayout Padding="10">
-        <Label Text="Результати пошуку" FontSize="Large" HorizontalOptions="Center" />
-        <!-- Таблиця для результатів пошуку -->
-        
-        <CollectionView x:Name="ResultsCollectionView">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Grid Padding="10">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
+        <VerticalStackLayout Padding="20" Spacing="15">
 
-                        <!-- Заголовки -->
-                        <Label Text="Ім'я" Grid.Column="0" Grid.Row="0"  FontAttributes="Bold" />
-                        <Label Text="Факультет" Grid.Column="1" Grid.Row="0"  FontAttributes="Bold" />
-                        <Label Text="Курс" Grid.Column="2" Grid.Row="0"  FontAttributes="Bold" />
-                        <Label Text="Кімната" Grid.Column="3" Grid.Row="0"  FontAttributes="Bold" />
-                        <Label Text="Дата заселення" Grid.Column="4" Grid.Row="0"  FontAttributes="Bold" />
-                        <Label Text="Дата виселення" Grid.Column="5" Grid.Row="0" FontAttributes="Bold" />
+            <!-- Заголовок -->
+            <Label Text="Результати пошуку"
+                   FontSize="28"
+                   FontAttributes="Bold"
+                   TextColor="#333"
+                   HorizontalOptions="Center" />
 
-                        <!-- Значення -->
-                        <Label Text="{Binding FullName}" Grid.Column="0"  Grid.Row="1" />
-                        <Label Text="{Binding Faculty}" Grid.Column="1" Grid.Row="1" />
-                        <Label Text="{Binding Course}" Grid.Column="2" Grid.Row="1" />
-                        <Label Text="{Binding Room}" Grid.Column="3" Grid.Row="1" />
-                        <Label Text="{Binding CheckInDate}" Grid.Column="4" Grid.Row="1" />
-                        <Label Text="{Binding CheckOutDate}" Grid.Column="5" Grid.Row="1" />
-                    </Grid>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+            <!-- Таблиця для результатів -->
+            <Frame BackgroundColor="White" CornerRadius="10" Padding="10" HasShadow="True">
+                <CollectionView x:Name="ResultsCollectionView">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame BackgroundColor="#F9FAFB" CornerRadius="10" Margin="5" Padding="10">
+                                <Grid ColumnSpacing="10" RowSpacing="5">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="2*" />
+                                        <ColumnDefinition Width="2*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <Label Text="ПІБ" Grid.Column="0" Grid.Row="0"  FontAttributes="Bold" />
+                                    <Label Text="Факультет" Grid.Column="1" Grid.Row="0"  FontAttributes="Bold" />
+                                    <Label Text="Курс" Grid.Column="2" Grid.Row="0"  FontAttributes="Bold" />
+                                    <Label Text="Кімната" Grid.Column="3" Grid.Row="0"  FontAttributes="Bold" />
+                                    <Label Text="Дата заселення" Grid.Column="4" Grid.Row="0"  FontAttributes="Bold" />
+                                    <Label Text="Дата виселення" Grid.Column="5" Grid.Row="0" FontAttributes="Bold" />
 
-        <Button Text="Назад" Clicked="OnBackButtonClicked" HorizontalOptions="Center" />
-    </VerticalStackLayout>
+                                    <!-- Значення -->
+                                    <Label Text="{Binding FullName}" Grid.Column="0"  Grid.Row="1" />
+                                    <Label Text="{Binding Faculty}" Grid.Column="1" Grid.Row="1" />
+                                    <Label Text="{Binding Course}" Grid.Column="2" Grid.Row="1" />
+                                    <Label Text="{Binding Room}" Grid.Column="3" Grid.Row="1" />
+                                    <Label Text="{Binding CheckInDate}" Grid.Column="4" Grid.Row="1" />
+                                    <Label Text="{Binding CheckOutDate}" Grid.Column="5" Grid.Row="1" />
+                                </Grid>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Frame>
+
+            <!-- Кнопки -->
+            <HorizontalStackLayout Spacing="20" HorizontalOptions="Center">
+                <Button Text="Трансформувати в HTML"
+                        FontSize="16"
+                        BackgroundColor="#4CAF50"
+                        TextColor="White"
+                        Padding="10"
+                        WidthRequest="230"
+                        CornerRadius="20"
+                        Clicked="OnTransformToHtmlClicked" />
+                <Button Text="Назад"
+                        FontSize="16"
+                        BackgroundColor="#FF5722"
+                        TextColor="White"
+                        Padding="10"
+                        WidthRequest="150"
+                        CornerRadius="20"
+                        Clicked="OnBackButtonClicked" />
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

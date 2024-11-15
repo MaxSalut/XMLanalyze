@@ -2,33 +2,59 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="XMLanalyze.Views.FileSelectionPage"
              Title="Завантаження файлу">
-    <VerticalStackLayout Padding="20">
+    <ContentPage.BackgroundColor>
+        <Color>#F7F9FC</Color>
+        <!-- Світлий фон -->
+    </ContentPage.BackgroundColor>
+    <VerticalStackLayout Padding="20" Spacing="15">
+
         <!-- Інформаційний блок -->
-        
-        <Label Text="Лабораторна робота: Обробка XML файлів"
-               FontSize="Large"
-               HorizontalOptions="Center" />
-        <Label Text="Ця програма дозволяє аналізувати XML-файли та виконувати їх трансформацію в HTML."
-               FontSize="Medium"
-               HorizontalOptions="Center" />
+        <Frame BackgroundColor="White" CornerRadius="10" Padding="15" HasShadow="True">
+            <VerticalStackLayout>
+                <Label Text="Лабораторна робота: Обробка XML файлів"
+                       FontSize="24"
+                       FontAttributes="Bold"
+                       TextColor="#333"
+                       HorizontalOptions="Center" />
+                <Label Text="Ця програма дозволяє аналізувати XML-файли та виконувати їх трансформацію в HTML."
+                       FontSize="16"
+                       TextColor="#555"
+                       HorizontalOptions="Center"
+                       LineBreakMode="WordWrap" />
+            </VerticalStackLayout>
+        </Frame>
 
         <!-- Кнопка "Додати файл" -->
-        <Button Text="Додати файл" Clicked="OnAddFileClicked"
-                HorizontalOptions="Center" VerticalOptions="Center" FontSize="Large"
-                Margin="5" Width="150"
-                BackgroundColor="LightGreen"
-           />
+        <Button Text="Додати файл" 
+                Clicked="OnAddFileClicked"
+                HorizontalOptions="Center"
+                FontSize="16"
+                Margin="10"
+                Padding="10"
+                WidthRequest="200"
+                BackgroundColor="#4CAF50"
+                TextColor="White"
+                CornerRadius="25"
+                />
 
         <!-- Статус завантаження файлу -->
         <Label x:Name="FileStatusLabel" Text="Файл не доданий"
+               FontSize="14"
+               TextColor="#777"
                HorizontalOptions="Center" />
 
         <!-- Кнопка "Далі" -->
-        <Button Text="Далі" x:Name="NextButton" IsEnabled="False"
+        <Button Text="Далі" 
+                x:Name="NextButton" 
+                IsEnabled="False"
+                FontSize="16"
+                Margin="20,40,0,0"
+                Padding="10"
+                WidthRequest="120"
+                BackgroundColor="#FF5722"
+                TextColor="White"
+                CornerRadius="25"
                 HorizontalOptions="End"
-                VerticalOptions="End"
-                Clicked="OnNextClicked" 
-                BackgroundColor="Red"
-                />
+                Clicked="OnNextClicked" />
     </VerticalStackLayout>
 </ContentPage>

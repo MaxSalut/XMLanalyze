@@ -16,7 +16,13 @@ namespace XMLanalyze
         protected override Window CreateWindow(IActivationState activationState)
         {
             Window window = base.CreateWindow(activationState);
-            if (window != null) { window.Title = "LabWork2"; }
+            if (window != null)
+            {
+                window.Title = "XML analyzer";
+                window.Width = 900;
+                window.Height = 650;
+            }
+           
 #if WINDOWS
         window.Created += (s, e) =>
         {

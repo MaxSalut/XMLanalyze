@@ -6,7 +6,7 @@ using XMLanalyze.XML_Manager;
 using System.Xml;
 using System.Xml.Xsl;
 using System.Reflection;
-
+using XMLanalyze.MainPageLogic;
 
 namespace XMLanalyze.Views
 {
@@ -101,7 +101,7 @@ namespace XMLanalyze.Views
             var filters = new Filters();
 
             // Пошук по атрибутам
-            if (NameCheckBox.IsChecked == true)
+            if (NameCheckBox.IsChecked == true && NameEntry!=null)
             {
                 filters.AttributeName = "FullName";
                 filters.AttributeValue = NameEntry.Text;
@@ -134,62 +134,14 @@ namespace XMLanalyze.Views
                 filters.NodeName = "CheckOutDate";
                 filters.NodeValue = CheckOutEntry.Date.ToString("dd.MM.yyyy");
             }
-
-            // Виконання пошуку
-            IList<Person> results = _currentParser.Find(filters);
-
-            if (results.Count > 0)
-            {
-                await Navigation.PushAsync(new FindResultPage(results));
-            }
-            else
-            {
-                await DisplayAlert("Результати пошуку", "Результатів не знайдено.", "OK");
-            }
+            await FindButtonLogic.ExecuteAsync(_currentParser, filters, Navigation);
         }
 
 
         private void OnClearClicked(object sender, EventArgs e)
         {
-            //тут має відбуватися очистка всіх критеріїв пошуку
-            NameEntry.Text = FacultyEntry.Text  = RoomEntry.Text = string.Empty; CheckInEntry.Date = DateTime.Now; CheckOutEntry.Date = DateTime.Now; CoursePicker.SelectedIndex = -1;
+            ClearButtonLogic.Execute(NameEntry, FacultyEntry, RoomEntry, CheckInEntry, CheckOutEntry, CoursePicker);
         }
-        private async void OnTransformToHtmlClicked(object sender, EventArgs e)
-        {
-            try
-            {
-                // Створення XSL-трансформатора
-                var xslt = new XslCompiledTransform();
-
-                // Отримуємо шаблон як вбудований ресурс
-                using (Stream xslStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("LabWork2.Resources.template.xsl"))
-                {
-                    if (xslStream == null)
-                    {
-                        await DisplayAlert("Помилка", "Шаблон template.xsl не знайдено як ресурс.", "OK");
-                        return;
-                    }
-                    using (XmlReader reader = XmlReader.Create(xslStream))
-                    {
-                        xslt.Load(reader);
-                    }
-                }
-
-                string projectPath = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.FullName;
-                string outputHtmlPath = Path.Combine(projectPath, "output.html");
-
-                // Виконання трансформації
-                using (var writer = new StreamWriter(outputHtmlPath))
-                {
-                    xslt.Transform(_filePath, null, writer);
-                }
-
-                await DisplayAlert("Успіх", $"HTML файл збережено в папці: {outputHtmlPath}", "OK");
-            }
-            catch (Exception ex)
-            {
-                await DisplayAlert("Помилка", $"Не вдалося виконати трансформацію: {ex.Message}", "OK");
-            }
-        }
+        
     }
 }
