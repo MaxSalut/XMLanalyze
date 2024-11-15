@@ -1,69 +1,45 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <Dormitory>
-	<Person>
-		<Name>
-			<FirstName>Іван</FirstName>
-			<LastName>Жуй</LastName>
-		</Name>
-		<Faculty>ММІ</Faculty>
-		<Course>2</Course>
+	<Person FullName="Жуй Іван Олександрович" Faculty="ММІ" Course="2">
 		<Room>607</Room>
-		<CheckInDate>22.06.2006</CheckInDate>
-		<CheckOutDate>23.06.2006</CheckOutDate>
+		<Dates>
+			<CheckInDate>22.06.2006</CheckInDate>
+			<CheckOutDate>23.06.2006</CheckOutDate>
+		</Dates>
 	</Person>
-	<Person>
-		<Name>
-			<FirstName>Юліана</FirstName>
-			<LastName>Вєлікая</LastName>
-		</Name>
-		<Faculty>ФІТ</Faculty>
-		<Course>2</Course>
+	<Person FullName="Вєлікая Юліана Петрівна" Faculty="ФІТ" Course="2">
 		<Room>101</Room>
-		<CheckInDate>11.11.2021</CheckInDate>
-		<CheckOutDate>11.11.2024</CheckOutDate>
+		<Dates>
+			<CheckInDate>11.11.2021</CheckInDate>
+			<CheckOutDate>11.11.2024</CheckOutDate>
+		</Dates>
 	</Person>
-	<Person>
-		<Name>
-			<FirstName>Максим</FirstName>
-			<LastName>Ільянус</LastName>
-		</Name>
-		<Faculty>ФКНК</Faculty>
-		<Course>2</Course>
+	<Person FullName="Ільянус Максим Андрійович" Faculty="ФКНК" Course="2">
 		<Room>303</Room>
-		<CheckInDate>24.04.2022</CheckInDate>
-		<CheckOutDate>06.12.2024</CheckOutDate>
+		<Dates>
+			<CheckInDate>24.04.2022</CheckInDate>
+			<CheckOutDate>06.12.2024</CheckOutDate>
+		</Dates>
 	</Person>
-	<Person>
-		<Name>
-			<FirstName>Іван</FirstName>
-			<LastName>Іваненко</LastName>
-		</Name>
-		<Faculty>Факультет інформаційних технологій</Faculty>
-		<Course>2</Course>
+	<Person FullName="Іваненко Іван Вікторович" Faculty="ФІТ" Course="2">
 		<Room>101</Room>
-		<CheckInDate>11.11.2021</CheckInDate>
-		<CheckOutDate>11.11.2024</CheckOutDate>
+		<Dates>
+			<CheckInDate>11.11.2021</CheckInDate>
+			<CheckOutDate>11.11.2024</CheckOutDate>
+		</Dates>
 	</Person>
-	<Person>
-		<Name>
-			<FirstName>Ольга</FirstName>
-			<LastName>Петренко</LastName>
-		</Name>
-		<Faculty>Факультет кібернетики</Faculty>
-		<Course>3</Course>
+	<Person FullName="Петренко Ольга Іванівна" Faculty="Факультет кібернетики" Course="3">
 		<Room>102</Room>
-		<CheckInDate>11.11.2021</CheckInDate>
-		<CheckOutDate>11.11.2024</CheckOutDate>
+		<Dates>
+			<CheckInDate>11.11.2021</CheckInDate>
+			<CheckOutDate>11.11.2024</CheckOutDate>
+		</Dates>
 	</Person>
-	<Person>
-		<Name>
-			<FirstName>Андрій</FirstName>
-			<LastName>Сидоренко</LastName>
-		</Name>
-		<Faculty>Факультет комп'ютерних наук</Faculty>
-		<Course>1</Course>
+	<Person FullName="Сидоренко Андрій Павлович" Faculty="Факультет комп'ютерних наук" Course="1">
 		<Room>101</Room>
-		<CheckInDate>11.11.2021</CheckInDate>
-		<CheckOutDate>11.11.2024</CheckOutDate>
+		<Dates>
+			<CheckInDate>11.11.2021</CheckInDate>
+			<CheckOutDate>11.11.2024</CheckOutDate>
+		</Dates>
 	</Person>
 </Dormitory>
