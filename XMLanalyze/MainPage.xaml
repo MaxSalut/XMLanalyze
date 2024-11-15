@@ -68,7 +68,7 @@
                 <CheckBox x:Name="CheckOutCheckBox" Grid.Column="3" Grid.Row="4" IsChecked="False" />
                 <Entry Grid.Column="1" Grid.ColumnSpan="5" Grid.Row="0" x:Name="NameEntry" Placeholder="ПІБ" />
                 <Entry Grid.Column="1" Grid.ColumnSpan="5"  Grid.Row="1" x:Name="FacultyEntry" Placeholder="Факультет" />
-                <Entry Grid.Column="1" Grid.ColumnSpan="5" Grid.Row="2" x:Name="CourseEntry" Placeholder="Курс" />
+                <Picker Grid.Column="1" Grid.ColumnSpan="5" Grid.Row="2" x:Name="CoursePicker" Title="Виберіть курс" />
                 <Entry Grid.Column="1" Grid.ColumnSpan="5" Grid.Row="3" x:Name="RoomEntry" Placeholder="Номер кімнати" />
                 <Label Grid.Column="1" Grid.Row="4" Text="Дата заселення" FontSize="Default" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
                 <DatePicker x:Name="CheckInEntry" Grid.Column="2" Grid.Row="4"  Width="200" Height="50" />

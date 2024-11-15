@@ -20,8 +20,43 @@ namespace XMLanalyze.Views
             InitializeComponent();
             _filePath = filePath;
             ParserPicker.SelectedIndexChanged += OnParserPickerChanged;
+            LoadCoursePickerData();
         }
+        private void LoadCoursePickerData()
+        {
+            // Очищення попередніх значень
+            CoursePicker.Items.Clear();
 
+            try
+            {
+                var settings = new XmlReaderSettings { DtdProcessing = DtdProcessing.Ignore };
+                using var stream = File.OpenRead(_filePath);
+                using var reader = XmlReader.Create(stream, settings);
+
+                var courses = new HashSet<string>();
+
+                while (reader.Read())
+                {
+                    // Якщо це вузол Person
+                    if (reader.NodeType == XmlNodeType.Element && reader.Name == "Person")
+                    {
+                        if (reader.GetAttribute("Course") is string course)
+                        {
+                            courses.Add(course); // Унікальні значення курсу
+                        }
+                    }
+                }
+
+                foreach (var course in courses)
+                {
+                    CoursePicker.Items.Add(course);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Помилка під час завантаження даних: {ex.Message}");
+            }
+        }
         private void OnParserPickerChanged(object sender, EventArgs e)
         {
             // Ініціалізація парсера на основі вибраного типу
@@ -81,7 +116,7 @@ namespace XMLanalyze.Views
             if (CourseCheckBox.IsChecked == true)
             {
                 filters.NodeName = "Course";
-                filters.NodeValue = CourseEntry.Text;
+                filters.NodeValue = CoursePicker.SelectedItem?.ToString();
             }
             if (RoomCheckBox.IsChecked == true)
             {
@@ -92,12 +127,12 @@ namespace XMLanalyze.Views
             if (CheckInCheckBox.IsChecked == true)
             {
                 filters.NodeName = "CheckInDate";
-                filters.NodeValue = CheckInEntry.Date.ToString("yyyy-MM-dd");
+                filters.NodeValue = CheckInEntry.Date.ToString("dd.MM.yyyy");
             }
             if (CheckOutCheckBox.IsChecked == true)
             {
                 filters.NodeName = "CheckOutDate";
-                filters.NodeValue = CheckOutEntry.Date.ToString("yyyy-MM-dd");
+                filters.NodeValue = CheckOutEntry.Date.ToString("dd.MM.yyyy");
             }
 
             // Виконання пошуку
@@ -117,7 +152,7 @@ namespace XMLanalyze.Views
         private void OnClearClicked(object sender, EventArgs e)
         {
             //тут має відбуватися очистка всіх критеріїв пошуку
-            NameEntry.Text = FacultyEntry.Text = CourseEntry.Text = RoomEntry.Text = string.Empty; CheckInEntry.Date = DateTime.Now; CheckOutEntry.Date = DateTime.Now;
+            NameEntry.Text = FacultyEntry.Text  = RoomEntry.Text = string.Empty; CheckInEntry.Date = DateTime.Now; CheckOutEntry.Date = DateTime.Now; CoursePicker.SelectedIndex = -1;
         }
         private async void OnTransformToHtmlClicked(object sender, EventArgs e)
         {

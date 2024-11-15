@@ -12,9 +12,11 @@ namespace XMLanalyze.XML_Manager
         public string NodeName { get; set; }
         public string NodeValue { get; set; }
 
-        // Пошук по датам
-        public DateOnly? CheckInDate { get; set; }
-        public DateOnly? CheckOutDate { get; set; }
+        // Діапазони дат
+        public DateOnly? CheckInStartDate { get; set; }
+        public DateOnly? CheckInEndDate { get; set; }
+        public DateOnly? CheckOutStartDate { get; set; }
+        public DateOnly? CheckOutEndDate { get; set; }
 
         public Filters()
         {
@@ -22,8 +24,10 @@ namespace XMLanalyze.XML_Manager
             AttributeValue = string.Empty;
             NodeName = string.Empty;
             NodeValue = string.Empty;
-            CheckInDate = null;
-            CheckOutDate = null;
+            CheckInStartDate = null;
+            CheckInEndDate = null;
+            CheckOutStartDate = null;
+            CheckOutEndDate = null;
         }
 
         /// <summary>
@@ -43,11 +47,13 @@ namespace XMLanalyze.XML_Manager
                                (person.GetType().GetProperty(NodeName)?.GetValue(person)?.ToString()
                                    ?.Contains(NodeValue, StringComparison.OrdinalIgnoreCase) == true);
 
-            // Перевірка по датам
-            bool checkInMatches = !CheckInDate.HasValue || person.CheckInDate == CheckInDate;
-            bool checkOutMatches = !CheckOutDate.HasValue || person.CheckOutDate == CheckOutDate;
+            // Перевірка по діапазонах дат
+            bool checkInMatches = (!CheckInStartDate.HasValue || (person.CheckInDate >= CheckInStartDate)) &&
+                                  (!CheckInEndDate.HasValue || (person.CheckInDate <= CheckInEndDate));
 
-            // Повертаємо результат
+            bool checkOutMatches = (!CheckOutStartDate.HasValue || (person.CheckOutDate >= CheckOutStartDate)) &&
+                                   (!CheckOutEndDate.HasValue || (person.CheckOutDate <= CheckOutEndDate));
+
             return attributeMatches && nodeMatches && checkInMatches && checkOutMatches;
         }
     }

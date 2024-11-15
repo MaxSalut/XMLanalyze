@@ -35,6 +35,12 @@ namespace XMLanalyze.XML_Manager
                         Room = personNode.SelectSingleNode("Room")?.InnerText ?? ""
                     };
 
+                    // Обробка атрибутів, включаючи Course
+                    foreach (XmlAttribute attribute in personNode.Attributes)
+                    {
+                        person.Attributes[attribute.Name] = attribute.Value;
+                    }
+
                     // Обробка вузлів Faculty і Course
                     if (personNode.SelectSingleNode("Faculty") != null)
                         person.Attributes["Faculty"] = personNode.SelectSingleNode("Faculty").InnerText;
@@ -67,6 +73,5 @@ namespace XMLanalyze.XML_Manager
         {
             return _people.FindAll(person => filters.ValidatePerson(person));
         }
-
     }
 }
