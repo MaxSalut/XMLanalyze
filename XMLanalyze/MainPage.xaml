@@ -4,18 +4,18 @@
              Title="Робота з XML">
     <ContentPage.BackgroundColor>
         <Color>#F3F4F6</Color>
-        <!-- Світлий фон -->
+        
     </ContentPage.BackgroundColor>
     <VerticalStackLayout Padding="20" Spacing="15">
 
-        <!-- Заголовок -->
+        
         <Label Text="Робота з XML"
                FontSize="28"
                FontAttributes="Bold"
                HorizontalOptions="Center"
                TextColor="#333" />
 
-        <!-- Панель дій -->
+       
         <Frame BackgroundColor="White" CornerRadius="10" Padding="15" HasShadow="True">
             <Grid ColumnSpacing="15">
                 <Grid.ColumnDefinitions>
@@ -24,7 +24,6 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
-                <!-- Вибір парсера -->
                 <Picker x:Name="ParserPicker" Title="Обрати тип парсера"
                         FontSize="16"
                         BackgroundColor="#E3F2FD"
@@ -39,7 +38,7 @@
                     </Picker.ItemsSource>
                 </Picker>
 
-                <!-- Кнопки -->
+              
                 <Button Grid.Column="1"
                         Text="Пошук"
                         FontSize="16"
@@ -61,7 +60,6 @@
             </Grid>
         </Frame>
 
-        <!-- Фільтри для пошуку -->
         <Frame BackgroundColor="White" CornerRadius="10" Padding="15" HasShadow="True">
             <Grid RowSpacing="15" ColumnSpacing="10">
                 <Grid.ColumnDefinitions>
@@ -81,7 +79,6 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
-                <!-- Чекбокси та поля -->
                 <CheckBox x:Name="NameCheckBox" Grid.Column="0" Grid.Row="0" IsChecked="False" />
                 <Entry Grid.Column="1" Grid.ColumnSpan="5" Grid.Row="0" 
                        x:Name="NameEntry" Placeholder="ПІБ"
@@ -102,7 +99,7 @@
                        x:Name="RoomEntry" Placeholder="Номер кімнати"
                        FontSize="16" BackgroundColor="#F1F1F1" />
 
-                <!-- Дата заселення -->
+            
                 <CheckBox x:Name="CheckInCheckBox" Grid.Column="0" Grid.Row="4" IsChecked="False" />
                 <Label Grid.Column="1" Grid.Row="4" 
                        Text="Дата заселення" FontSize="16" TextColor="#333"
@@ -110,7 +107,6 @@
                 <DatePicker x:Name="CheckInEntry" Grid.Column="2" Grid.Row="4" 
                             BackgroundColor="White" FontSize="16" />
 
-                <!-- Дата виселення -->
                 <CheckBox x:Name="CheckOutCheckBox" Grid.Column="3" Grid.Row="4" IsChecked="False" />
                 <Label Grid.Column="4" Grid.Row="4" 
                        Text="Дата виселення" FontSize="16" TextColor="#333"

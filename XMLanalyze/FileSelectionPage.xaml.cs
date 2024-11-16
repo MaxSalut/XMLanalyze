@@ -1,4 +1,4 @@
-// FileSelectionPage.xaml.cs
+
 using Microsoft.Maui.Controls;
 using System;
 using System.IO;
@@ -16,21 +16,21 @@ namespace XMLanalyze.Views
 
         private async void OnAddFileClicked(object sender, EventArgs e)
         {
-            // Виклик діалогу для вибору файлу
+           
             var result = await FilePicker.PickAsync();
 
             if (result != null)
             {
-                // Перевіряємо, чи файл має розширення .xml
+                
                 if (Path.GetExtension(result.FullPath).Equals(".xml", StringComparison.OrdinalIgnoreCase))
                 {
-                    SelectedFilePath = result.FullPath; // Зберігаємо шлях до вибраного файлу
+                    SelectedFilePath = result.FullPath; 
                     FileStatusLabel.Text = $"Вибраний файл: {Path.GetFileName(SelectedFilePath)}";
-                    NextButton.IsEnabled = true; // Дозволяємо перехід до наступної сторінки
+                    NextButton.IsEnabled = true; 
                 }
                 else
                 {
-                    // Виводимо повідомлення про помилку
+                    
                     await DisplayAlert("Помилка", "Будь ласка, оберіть файл у форматі XML.", "OK");
                 }
             }

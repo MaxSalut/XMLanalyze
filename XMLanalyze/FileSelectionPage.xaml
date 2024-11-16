@@ -4,11 +4,10 @@
              Title="Завантаження файлу">
     <ContentPage.BackgroundColor>
         <Color>#F7F9FC</Color>
-        <!-- Світлий фон -->
+      
     </ContentPage.BackgroundColor>
     <VerticalStackLayout Padding="20" Spacing="15">
 
-        <!-- Інформаційний блок -->
         <Frame BackgroundColor="White" CornerRadius="10" Padding="15" HasShadow="True">
             <VerticalStackLayout>
                 <Label Text="Лабораторна робота: Обробка XML файлів"
@@ -24,7 +23,6 @@
             </VerticalStackLayout>
         </Frame>
 
-        <!-- Кнопка "Додати файл" -->
         <Button Text="Додати файл" 
                 Clicked="OnAddFileClicked"
                 HorizontalOptions="Center"
@@ -37,13 +35,11 @@
                 CornerRadius="25"
                 />
 
-        <!-- Статус завантаження файлу -->
         <Label x:Name="FileStatusLabel" Text="Файл не доданий"
                FontSize="14"
                TextColor="#777"
                HorizontalOptions="Center" />
 
-        <!-- Кнопка "Далі" -->
         <Button Text="Далі" 
                 x:Name="NextButton" 
                 IsEnabled="False"

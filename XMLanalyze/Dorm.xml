@@ -1,45 +1,45 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <Dormitory>
-	<Person FullName="Жуй Іван Олександрович" Faculty="ММІ" Course="2">
+	<Person FullName="Жуй Іван Миколайович" Faculty="ММІ" Course="2">
 		<Room>607</Room>
 		<Dates>
-			<CheckInDate>22.06.2006</CheckInDate>
-			<CheckOutDate>23.06.2006</CheckOutDate>
+			<CheckInDate>22.06.2020</CheckInDate>
+			<CheckOutDate>23.06.2023</CheckOutDate>
 		</Dates>
 	</Person>
-	<Person FullName="Вєлікая Юліана Петрівна" Faculty="ФІТ" Course="2">
-		<Room>101</Room>
+	<Person FullName="Велика Юліана Юріївна" Faculty="ФІТ" Course="2">
+		<Room>201</Room>
 		<Dates>
 			<CheckInDate>11.11.2021</CheckInDate>
 			<CheckOutDate>11.11.2024</CheckOutDate>
 		</Dates>
 	</Person>
-	<Person FullName="Ільянус Максим Андрійович" Faculty="ФКНК" Course="2">
+	<Person FullName="Захарченко Максим Андрійович" Faculty="ФКНК" Course="2">
 		<Room>303</Room>
 		<Dates>
 			<CheckInDate>24.04.2022</CheckInDate>
 			<CheckOutDate>06.12.2024</CheckOutDate>
 		</Dates>
 	</Person>
-	<Person FullName="Іваненко Іван Вікторович" Faculty="ФІТ" Course="2">
+	<Person FullName="Мельник Іван Вікторович" Faculty="ФРЕКС" Course="4">
 		<Room>101</Room>
 		<Dates>
 			<CheckInDate>11.11.2021</CheckInDate>
 			<CheckOutDate>11.11.2024</CheckOutDate>
 		</Dates>
 	</Person>
-	<Person FullName="Петренко Ольга Іванівна" Faculty="Факультет кібернетики" Course="3">
-		<Room>102</Room>
+	<Person FullName="Петренко Ольга Іванівна" Faculty="ФКНК" Course="3">
+		<Room>505</Room>
 		<Dates>
-			<CheckInDate>11.11.2021</CheckInDate>
-			<CheckOutDate>11.11.2024</CheckOutDate>
+			<CheckInDate>11.12.2021</CheckInDate>
+			<CheckOutDate>10.11.2024</CheckOutDate>
 		</Dates>
 	</Person>
-	<Person FullName="Сидоренко Андрій Павлович" Faculty="Факультет комп'ютерних наук" Course="1">
+	<Person FullName="Сидоренко Андрій Павлович" Faculty="ФРЕКС" Course="1">
 		<Room>101</Room>
 		<Dates>
-			<CheckInDate>11.11.2021</CheckInDate>
-			<CheckOutDate>11.11.2024</CheckOutDate>
+			<CheckInDate>20.01.2022</CheckInDate>
+			<CheckOutDate>11.11.2025</CheckOutDate>
 		</Dates>
 	</Person>
 </Dormitory>

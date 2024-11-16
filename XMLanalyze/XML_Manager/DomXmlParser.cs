@@ -35,20 +35,20 @@ namespace XMLanalyze.XML_Manager
                         Room = personNode.SelectSingleNode("Room")?.InnerText ?? ""
                     };
 
-                    // Обробка атрибутів, включаючи Course
+                  
                     foreach (XmlAttribute attribute in personNode.Attributes)
                     {
                         person.Attributes[attribute.Name] = attribute.Value;
                     }
 
-                    // Обробка вузлів Faculty і Course
+                    
                     if (personNode.SelectSingleNode("Faculty") != null)
                         person.Attributes["Faculty"] = personNode.SelectSingleNode("Faculty").InnerText;
 
                     if (personNode.SelectSingleNode("Course") != null)
                         person.Attributes["Course"] = personNode.SelectSingleNode("Course").InnerText;
 
-                    // Обробка дат
+                    
                     var datesNode = personNode.SelectSingleNode("Dates");
                     if (datesNode != null)
                     {

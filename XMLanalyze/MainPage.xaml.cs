@@ -1,5 +1,4 @@
-﻿// LabWork2/MainPage.xaml.cs
-
+﻿
 using Microsoft.Maui.Controls;
 using System;
 using XMLanalyze.XML_Manager;
@@ -15,6 +14,10 @@ namespace XMLanalyze.Views
         private readonly string _filePath;
         private IXmlParser _currentParser;
 
+        public string FilePath => _filePath;
+
+        public IXmlParser CurrentParser { get => _currentParser; set => _currentParser = value; }
+
         public MainPage(string filePath)
         {
             InitializeComponent();
@@ -24,25 +27,25 @@ namespace XMLanalyze.Views
         }
         private void LoadCoursePickerData()
         {
-            // Очищення попередніх значень
+            
             CoursePicker.Items.Clear();
 
             try
             {
                 var settings = new XmlReaderSettings { DtdProcessing = DtdProcessing.Ignore };
-                using var stream = File.OpenRead(_filePath);
+                using var stream = File.OpenRead(FilePath);
                 using var reader = XmlReader.Create(stream, settings);
 
                 var courses = new HashSet<string>();
 
                 while (reader.Read())
                 {
-                    // Якщо це вузол Person
+                    
                     if (reader.NodeType == XmlNodeType.Element && reader.Name == "Person")
                     {
                         if (reader.GetAttribute("Course") is string course)
                         {
-                            courses.Add(course); // Унікальні значення курсу
+                            courses.Add(course); 
                         }
                     }
                 }
@@ -59,26 +62,26 @@ namespace XMLanalyze.Views
         }
         private void OnParserPickerChanged(object sender, EventArgs e)
         {
-            // Ініціалізація парсера на основі вибраного типу
+            
             switch (ParserPicker.SelectedItem.ToString())
             {
                 case "DOM":
-                    _currentParser = new DomXmlParser();
+                    CurrentParser = new DomXmlParser();
                     break;
                 case "LINQ to XML":
-                    _currentParser = new LinqXmlParser();
+                    CurrentParser = new LinqXmlParser();
                     break;
                 case "SAX":
-                    _currentParser = new SaxXmlParser();
+                    CurrentParser = new SaxXmlParser();
                     break;
             }
 
-            // Завантаження файлу з обраним парсером
-            if (_currentParser != null)
+          
+            if (CurrentParser != null)
             {
                 var settings = new XmlReaderSettings { DtdProcessing = DtdProcessing.Ignore };
-                using var stream = File.OpenRead(_filePath);
-                if (_currentParser.Load(stream, settings))
+                using var stream = File.OpenRead(FilePath);
+                if (CurrentParser.Load(stream, settings))
                 {
                     Console.WriteLine("Файл завантажено успішно.");
                 }
@@ -91,23 +94,21 @@ namespace XMLanalyze.Views
         }
         private async void OnFindClicked(object sender, EventArgs e)
         {
-            if (_currentParser == null)
+            if (CurrentParser == null)
             {
                 await DisplayAlert("Помилка", "Парсер не обрано.", "OK");
                 return;
             }
 
-            // Формування фільтрів
+           
             var filters = new Filters();
 
-            // Пошук по атрибутам
+           
             if (NameCheckBox.IsChecked == true && NameEntry!=null)
             {
                 filters.AttributeName = "FullName";
                 filters.AttributeValue = NameEntry.Text;
             }
-
-            // Пошук по вузлам
             if (FacultyCheckBox.IsChecked == true)
             {
                 filters.NodeName = "Faculty";
@@ -134,7 +135,7 @@ namespace XMLanalyze.Views
                 filters.NodeName = "CheckOutDate";
                 filters.NodeValue = CheckOutEntry.Date.ToString("dd.MM.yyyy");
             }
-            await FindButtonLogic.ExecuteAsync(_currentParser, filters, Navigation);
+            await FindButtonLogic.ExecuteAsync(CurrentParser, filters, Navigation);
         }
 
 

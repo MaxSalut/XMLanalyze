@@ -1,10 +1,7 @@
-﻿using System;
-using System.IO;
-using System.Reflection;
+﻿using System.Reflection;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Xsl;
-using Microsoft.Maui.Controls;
 using XMLanalyze.XML_Manager;
 namespace XMLanalyze.FindResultPageLogic
 {
@@ -14,14 +11,11 @@ namespace XMLanalyze.FindResultPageLogic
         {
             try
             {
-                // Створення тимчасового XML-файлу
                 string tempXmlPath = Path.Combine(Path.GetTempPath(), "searchResults.xml");
                 SaveResultsToXml(tempXmlPath, searchResults);
 
-                // Створення XSL-трансформатора
                 var xslt = new XslCompiledTransform();
 
-                // Отримання шаблону як вбудованого ресурсу
                 using (Stream xslStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("XMLanalyze.Resources.template.xsl"))
                 {
                     if (xslStream == null)
@@ -35,11 +29,9 @@ namespace XMLanalyze.FindResultPageLogic
                     }
                 }
 
-                // Вказуємо шлях для збереження HTML
                 string projectPath = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.FullName;
                 string outputHtmlPath = Path.Combine(projectPath, "searchResults.html");
 
-                // Виконання трансформації
                 using (var writer = new StreamWriter(outputHtmlPath))
                 {
                     xslt.Transform(tempXmlPath, null, writer);

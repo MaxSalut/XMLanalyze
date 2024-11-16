@@ -1,4 +1,3 @@
-// LabWork2/Views/FindResultPage.xaml.cs
 
 using Microsoft.Maui.Controls;
 using System.Collections.Generic;
@@ -29,7 +28,7 @@ namespace XMLanalyze.Views
 
         private async void OnBackButtonClicked(object sender, EventArgs e)
         {
-            await Navigation.PopAsync(); // Повернення на попередню сторінку
+            await Navigation.PopAsync();
         }
     }
 }
